@@ -30,7 +30,7 @@
 # empire.js.liquid
 ## Inserted before the ProductDetails class. Responsible for the custom total next to the quantity input label in product page (hidden on cart context), 
 
-class GlobalVariables {
+```class GlobalVariables {
     static currentPrice = 1.00;
     static currentQty = 1;
     static money_format = null;
@@ -39,7 +39,7 @@ class GlobalVariables {
     GlobalVariables.currentPrice = newPrice;
     GlobalVariables.newCost()
     }
-    
+
     static updateCurrentQty(newQty) {
     GlobalVariables.currentQty = newQty;
     console.log("updating updateCurrentQty")
@@ -54,7 +54,7 @@ class GlobalVariables {
         let totalCostToMoney = Shopify.formatMoney(totalCost, GlobalVariables.money_format)
         spanElement.innerHTML = totalCostToMoney;
     }
-}
+}```
 
 ### Method implementation locations
 #### On _updatePrice(variant) 
