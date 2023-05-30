@@ -1,6 +1,6 @@
 
 # static-card.liquid
-## Inserted inside the form, when submit it includes a coupon automatically applied on checkout, coupon contains price rules.
+## Inserted inside the checkout form, when submit it includes a coupon automatically applied on checkout, coupon contains price rules.
 {% if customer.tags contains 'b2b' %}
   <input type="hidden" name="discount" value="b2b">
 {% endif %}
