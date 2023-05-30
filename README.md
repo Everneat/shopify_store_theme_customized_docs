@@ -29,6 +29,32 @@
 
 # empire.js.liquid
 ## Inserted before the ProductDetails class. Responsible for the custom total next to the quantity input label in product page (hidden on cart context), 
+
+class GlobalVariables{
+    static currentPrice = 1.00;
+    static currentQty = 1;
+    static money_format = null;
+    static showContent = null;
+    static updateCurrentPrice(newPrice) {
+    GlobalVariables.currentPrice = newPrice;
+    GlobalVariables.newCost()
+    }
+    static updateCurrentQty(newQty) {
+    GlobalVariables.currentQty = newQty;
+    console.log("updating updateCurrentQty")
+    GlobalVariables.newCost()
+    }
+    static updateMoneyFormat(money_format) {
+    GlobalVariables.money_format = money_format
+    }
+    static newCost() {
+        const totalCost = ((GlobalVariables.currentPrice * GlobalVariables.currentQty)/100).toFixed(2);  
+        const spanElement = document.querySelector('[data-product-context-total]');
+        let totalCostToMoney = Shopify.formatMoney(totalCost, GlobalVariables.money_format)
+        spanElement.innerHTML = totalCostToMoney;
+    }
+}
+
 ### Method implementation locations
 #### On _updatePrice(variant) 
 - updateCurrentQty
@@ -37,31 +63,6 @@
 #### On _editItemQuantityOnProductContext(target)
 - updateCurrentQty
 
-    class GlobalVariables {
-      static currentPrice = 1.00;
-      static currentQty = 1;
-      static money_format = null;
-      static showContent = null;
-
-      static updateCurrentPrice(newPrice) {
-        GlobalVariables.currentPrice = newPrice;
-        GlobalVariables.newCost()
-      }
-      static updateCurrentQty(newQty) {
-        GlobalVariables.currentQty = newQty;
-        console.log("updating updateCurrentQty")
-        GlobalVariables.newCost()
-      }
-      static updateMoneyFormat(money_format) {
-        GlobalVariables.money_format = money_format
-      }
-      static newCost() {
-         const totalCost = ((GlobalVariables.currentPrice * GlobalVariables.currentQty)/100).toFixed(2);  
-         const spanElement = document.querySelector('[data-product-context-total]');
-         let totalCostToMoney = Shopify.formatMoney(totalCost, GlobalVariables.money_format)
-         spanElement.innerHTML = totalCostToMoney;
-      }
-    }
-
-
+polcadots
+hedara
   -Nothing follows-
