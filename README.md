@@ -1,13 +1,13 @@
 
 # static-card.liquid
-## Inserted inside the checkout form, when submit it includes a coupon automatically applied on checkout, coupon contains price rules. input value depends on coupon code
+### Inserted inside the checkout form, when submit it includes a coupon automatically applied on checkout, coupon contains price rules. input value depends on coupon code
 ```
 {% if customer.tags contains 'b2b' %}
   <input type="hidden" name="discount" value="b2b">
 {% endif %}
 ```
 # quantity-selector.liquid
-## Inserted before the first quantity_increment_value assignment. This is the quantity setup for default value, min and step for b2b tagged customer.
+### Inserted before the first quantity_increment_value assignment. This is the quantity setup for default value, min and step for b2b tagged customer.
 
 ```
 {% assign qtyPerCase = nil %}
@@ -31,7 +31,7 @@
 ```
 
 # empire.js.liquid
-## Inserted before the ProductDetails class. Responsible for the custom total next to the quantity input label in product page (hidden on cart context), 
+### Inserted before the ProductDetails class. Responsible for the custom total next to the quantity input label in product page (hidden on cart context), 
 
 ```
 class GlobalVariables {
