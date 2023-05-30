@@ -1,13 +1,15 @@
 
 # static-card.liquid
 ## Inserted inside the checkout form, when submit it includes a coupon automatically applied on checkout, coupon contains price rules.
+```
 {% if customer.tags contains 'b2b' %}
   <input type="hidden" name="discount" value="b2b">
 {% endif %}
-
+```
 # quantity-selector.liquid
 ## Inserted before the first quantity_increment_value assignment. This is the quantity setup for default value, min and step for b2b tagged customer.
 
+```
 {% assign qtyPerCase = nil %}
 {% unless  customer.tags contains "b2b" %}
      <script>
@@ -26,11 +28,13 @@
          {% endif %}
     {% endif %}
 {% endunless %}
+```
 
 # empire.js.liquid
 ## Inserted before the ProductDetails class. Responsible for the custom total next to the quantity input label in product page (hidden on cart context), 
 
-```class GlobalVariables {
+```
+class GlobalVariables {
     static currentPrice = 1.00;
     static currentQty = 1;
     static money_format = null;
@@ -54,7 +58,8 @@
         let totalCostToMoney = Shopify.formatMoney(totalCost, GlobalVariables.money_format)
         spanElement.innerHTML = totalCostToMoney;
     }
-}```
+}
+```
 
 ### Method implementation locations
 #### On _updatePrice(variant) 
