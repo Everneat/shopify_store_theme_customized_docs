@@ -54,7 +54,7 @@ class GlobalVariables {
     static updateMoneyFormat(money_format) {
         GlobalVariables.money_format = money_format
     }
-    
+
     static newCost() {
         const totalCost = ((GlobalVariables.currentPrice * GlobalVariables.currentQty)/100).toFixed(2);  
         const spanElement = document.querySelector('[data-product-context-total]');
@@ -65,11 +65,11 @@ class GlobalVariables {
 ```
 
 ### Method implementation locations
-#### On _updatePrice(variant) 
+#### On _updatePrice(variant) method
 - updateCurrentQty
 - updateCurrentPrice
 
-#### On _editItemQuantityOnProductContext(target)
+#### On _editItemQuantityOnProductContext(target) method
 - updateCurrentQty
 
 polcadots
