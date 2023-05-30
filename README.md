@@ -14,7 +14,6 @@
           console.log("is not b2b ")
       </script>
     {% else %}
-
       {% if context == 'product' %}
           {% if product.metafields.custom.qtyPerCase %}
             {% assign  qtyPerCase = product.metafields.custom.qtyPerCase %}
@@ -26,28 +25,24 @@
           {% endif %}
          {% endif %}
     {% endif %}
-  
 {% endunless %}
-
-{% assign quantity_increment_value =  qtyPerCase | default  : settings.quantity_increment_value %}
 
 # empire.js.liquid
 ## Inserted before the ProductDetails class. Responsible for the custom total next to the quantity input label in product page (hidden on cart context), 
 ### Method implementation locations
--On _updatePrice(variant) 
---updateCurrentQty
---updateCurrentPrice
+#### On _updatePrice(variant) 
+- updateCurrentQty
+- updateCurrentPrice
 
--On _editItemQuantityOnProductContext(target)
---updateCurrentQty
+#### On _editItemQuantityOnProductContext(target)
+- updateCurrentQty
 
     class GlobalVariables {
       static currentPrice = 1.00;
       static currentQty = 1;
       static money_format = null;
       static showContent = null;
-      
-    
+
       static updateCurrentPrice(newPrice) {
         GlobalVariables.currentPrice = newPrice;
         GlobalVariables.newCost()
@@ -64,11 +59,9 @@
          const totalCost = ((GlobalVariables.currentPrice * GlobalVariables.currentQty)/100).toFixed(2);  
          const spanElement = document.querySelector('[data-product-context-total]');
          let totalCostToMoney = Shopify.formatMoney(totalCost, GlobalVariables.money_format)
-       
          spanElement.innerHTML = totalCostToMoney;
       }
-      
-      
     }
 
-    ## -Nothings follow-
+
+  -Nothing follows-
