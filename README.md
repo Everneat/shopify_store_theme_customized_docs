@@ -1,6 +1,6 @@
 
 # static-card.liquid
-## Inserted inside the checkout form, when submit it includes a coupon automatically applied on checkout, coupon contains price rules.
+## Inserted inside the checkout form, when submit it includes a coupon automatically applied on checkout, coupon contains price rules. input value depends on coupon code
 ```
 {% if customer.tags contains 'b2b' %}
   <input type="hidden" name="discount" value="b2b">
@@ -39,19 +39,22 @@ class GlobalVariables {
     static currentQty = 1;
     static money_format = null;
     static showContent = null;
+
     static updateCurrentPrice(newPrice) {
-    GlobalVariables.currentPrice = newPrice;
-    GlobalVariables.newCost()
+        GlobalVariables.currentPrice = newPrice;
+        GlobalVariables.newCost()
     }
 
     static updateCurrentQty(newQty) {
-    GlobalVariables.currentQty = newQty;
-    console.log("updating updateCurrentQty")
-    GlobalVariables.newCost()
+        GlobalVariables.currentQty = newQty;
+        console.log("updating updateCurrentQty")
+        GlobalVariables.newCost()
     }
+
     static updateMoneyFormat(money_format) {
-    GlobalVariables.money_format = money_format
+        GlobalVariables.money_format = money_format
     }
+    
     static newCost() {
         const totalCost = ((GlobalVariables.currentPrice * GlobalVariables.currentQty)/100).toFixed(2);  
         const spanElement = document.querySelector('[data-product-context-total]');
