@@ -126,9 +126,7 @@
 {% assign include_compare_price = include_compare_price | default: true %}
 
 <div class="price {{ class_root }}__price {% if compare_at_price_varies %}price--varies{% endif %}">
-     {% if customer.tags contains 'b2b' %}
-       <input type = "hidden" value="true" data-isb2b>
-      {% endif %}
+    
   {% if include_compare_price %}
     <div
       class="price__compare-at {% if emphasize_price or on_sale and show_original %}visible{% endif %}"
@@ -202,9 +200,13 @@
 
   <div class="price__current {% if emphasize_price %}price__current--emphasize{% endif %} {% if on_sale %}price__current--on-sale{% endif %}" data-price-container>
     {%- capture price_html -%}
+      {% if customer.tags contains 'b2b' %}
+        <span>MSRP : </span>
+      {% endif %}
       <span class="money" data-price>
         {{ price | money }}
       </span>
+      
     {%- endcapture -%}
 
     {% capture current_price_range_html %}
@@ -215,6 +217,7 @@
           <span class="money price__current--max" data-price-max>{{ price_max | money }}</span>
         {% else %}
           {{ 'product_price.price.range_html' | t: price: price_html | strip_newlines }}
+        
         {% endif %}
       {% endif %}
     {% endcapture %}
@@ -230,33 +233,41 @@
   customized for b2b tagged customers
  {% endcomment %}
     {%- capture b2b_price_html -%}
+      {% if customer.tags contains 'b2b' %}
       <span class="money" data-b2b-price>
         {{ price |times : 0.5 | money   }}
       </span>
-     
+      {% endif %}
     {%- endcapture -%}
 
     {% capture b2b_current_price_range_html %}
-      {% if price_varies %}
-        {% if price_range_format == 'range' %}
-         
-          <span class="money price__current--min" data-b2b-price-min>
-            {{ price_min | times : 0.5 | money}}
-          </span>
-          -
-          <span class="money price__current--max" data-b2b-price-max>{{ price_max | times : 0.5 | money }}</span>
-        {% else %}
-          {{ 'product_price.price.range_html' | t: price:  b2b_price_html | strip_newlines }}
+      <script>
+       const test123 = {{customer.tags}}
+        console.log(test123, "test123")
+      </script>
+      {% if customer.tags contains 'b2b' %}
+        {% if price_varies %}
+          {% if price_range_format == 'range' %}
+            <span class="money price__current--min" data-b2b-price-min>
+              {{ price_min | times : 0.5 | money}}
+            </span>
+            -
+            <span class="money price__current--max" data-b2b-price-max>{{ price_max | times : 0.5 | money }}</span>
+          {% else %}
+            {{ 'product_price.price.range_html' | t: price:  b2b_price_html | strip_newlines }}
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endcapture %}
     
     {% capture b2b_current_price_html %}
-        {% if on_sale and show_original %}
-          <span class="visually-hidden">{{ 'product_price.price.current' | t }}</span>
-        {% endif %}
-        {{ b2b_price_html }}
-      {% endcapture %}
+       {% if customer.tags contains 'b2b' %}
+          {% if on_sale and show_original %}
+            <span class="visually-hidden">{{ 'product_price.price.current' | t }}</span>
+          {% endif %}
+            {{ b2b_price_html }}
+      {% endif %}
+    {% endcapture %}
 
 
     
@@ -274,29 +285,36 @@
         <br><span>WSP : </span>
          
       {% endif %}
-      {{ b2b_current_price_range_html }}
+        {% if customer.tags contains 'b2b' %}
+           {{ b2b_current_price_range_html }}
+        {% endif %}
+      
+      
       {% comment %}
       {% endcomment %}
     {% else %}
-      {% if customer.tags contains 'b2b' %}
-        <span>MSRP : </span>
-      {% endif %}
+      
       {{ current_price_html }}
       
-      {% if customer.tags contains 'b2b' %}
-       
-        <br> <span>WSP : </span>
-       
-      {% endif %}
-      {{ b2b_current_price_html }}
+       {% if customer.tags contains 'b2b' %}
+           {{ b2b_current_price_html }}
+        {% endif %}
+     
       {% comment %}
       {% endcomment %}
     {% endif %}
 
 
   </div>
-
+<!-- custtom codes starts here  -->
+      {% if customer.tags contains 'b2b' %}
+        <br>WSP :<span data-b2b-wsp></span>
+      {% endif %}
+ <!-- custtom codes ends here  -->
   {% if include_hidden_price %}
+    <script>
+      console.log("include_hidden_price", {{ customer.tags | json}})
+    </script>
     {% comment %}
       Hide an element containing current price info to fill in the price when no variant is selected
     {% endcomment %}
