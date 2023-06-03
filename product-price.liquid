@@ -234,6 +234,7 @@
  {% endcomment %}
     {%- capture b2b_price_html -%}
       {% if customer.tags contains 'b2b' %}
+        <br> WSP:
       <span class="money" data-b2b-price>
         {{ price |times : 0.5 | money   }}
       </span>
@@ -308,13 +309,19 @@
   </div>
 <!-- custtom codes starts here  -->
       {% if customer.tags contains 'b2b' %}
+        {% unless context != 'product' or  context != 'recent' %}
+           <br>WSP :<span data-b2b-wsp></span>
+        {% endunless %}
+
+    {% if context == 'product' %}
         <br>WSP :<span data-b2b-wsp></span>
+      {% endif %}
+         
+      
       {% endif %}
  <!-- custtom codes ends here  -->
   {% if include_hidden_price %}
-    <script>
-      console.log("include_hidden_price", {{ customer.tags | json}})
-    </script>
+   
     {% comment %}
       Hide an element containing current price info to fill in the price when no variant is selected
     {% endcomment %}
