@@ -53,13 +53,15 @@
       "error_general": {{ 'cart.shipping.error_general' | t | json }}
     }
   }
+  console.log({{ cart | json }})
 </script>
-
+    
 <form
   action="{{ routes.cart_url }}"
   method="post"
   aria-label="cart checkout"
 >
+  
   {% if customer.tags contains 'b2b' %}
     <input type="hidden" name="discount" value="b2b">
   {% endif %}
@@ -73,7 +75,16 @@
    
 <!--     next to this comment is the customized codes added to this theme by yours truely, gerz! -->
     {% if customer.tags contains 'b2b' %}
-       <br><span style = "display:block;" data-discount-catch-phrase> You are entitled for 50% if you reach the required amount upon checkout! </span>
+      
+      {% assign good_discount = true %}
+        {% if good_discount %}
+          
+         <br><span style = "display:block;" data-discount-catch-phrase> Add <span data-add-more-price></span> more to avail 50% discount upon checkout!</span>
+        {% else %}
+          <script>
+            
+          </script>
+        {% endif  %}  
     {% endif  %}
 <!--  custom ends here -->
     </div>
@@ -265,7 +276,13 @@
     {% endif %}
   </section>
 </form>
-
+<!-- custom starts here -->
+<script>
+  const convertedAmountv2 = Number(document.querySelector('[data-cart-total]').innerHTML.replace(/[$,]/g, ""));
+  const resultForAddMorev2 = (250.00 - convertedAmountv2) < 0 ? 0 : (250.00 - convertedAmountv2).toFixed(2) ;
+  document.querySelector('[data-add-more-price]').innerHTML = "$" + resultForAddMorev2
+</script>
+<!-- custom ends here -->
 {% schema %}
 {
   "name": "t:sections.cart_page.name",
