@@ -9,7 +9,7 @@
 # quantity-selector.liquid
 ### Inserted before the first quantity_increment_value assignment. This is the quantity setup for default value, min and step for b2b tagged customer.
 
-```
+``` 
 {% assign qtyPerCase = nil %}
 {% unless  customer.tags contains "b2b" %}
      <script>
